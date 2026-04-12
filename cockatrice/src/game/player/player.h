@@ -169,6 +169,11 @@ public:
         return qobject_cast<PileZoneLogic *>(zones.value(ZoneNames::EXILE));
     }
 
+    PileZoneLogic *getCommanderZone()
+    {
+        return qobject_cast<PileZoneLogic *>(zones.value(ZoneNames::COMMANDER));
+    }
+
     PileZoneLogic *getSideboardZone()
     {
         return qobject_cast<PileZoneLogic *>(zones.value(ZoneNames::SIDEBOARD));

@@ -197,6 +197,9 @@ QString CardZoneLogic::getTranslatedName(bool theirOwn, GrammaticalCase gc) cons
         return (theirOwn ? tr("their graveyard", "nominative") : tr("%1's graveyard", "nominative").arg(ownerName));
     else if (name == ZoneNames::EXILE)
         return (theirOwn ? tr("their exile", "nominative") : tr("%1's exile", "nominative").arg(ownerName));
+    else if (name == ZoneNames::COMMANDER)
+        return (theirOwn ? tr("their commander zone", "nominative")
+                         : tr("%1's commander zone", "nominative").arg(ownerName));
     else if (name == ZoneNames::SIDEBOARD)
         switch (gc) {
             case CaseLookAtZone:

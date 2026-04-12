@@ -24,7 +24,7 @@ private slots:
     }
 
 public:
-    PileZone(PileZoneLogic *_logic, QGraphicsItem *parent);
+    PileZone(PileZoneLogic *_logic, QGraphicsItem *parent, bool _rotate = true);
     [[nodiscard]] QRectF boundingRect() const override;
     [[nodiscard]] QPainterPath shape() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -37,6 +37,9 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+
+private:
+    bool rotate;
 };
 
 #endif

@@ -22,6 +22,7 @@ enum CardMenuActionType
     cmMoveToHand,
     cmMoveToGraveyard,
     cmMoveToExile,
+    cmMoveToCommander,
     cmMoveToTable
 };
 

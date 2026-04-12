@@ -12,16 +12,20 @@
 #include <QPainter>
 #include <libcockatrice/protocol/pb/command_move_card.pb.h>
 
-PileZone::PileZone(PileZoneLogic *_logic, QGraphicsItem *parent) : CardZone(_logic, parent)
+PileZone::PileZone(PileZoneLogic *_logic, QGraphicsItem *parent, bool _rotate) : CardZone(_logic, parent)
 {
+    rotate = _rotate;
+
     setCacheMode(DeviceCoordinateCache); // Do not move this line to the parent constructor!
     setAcceptHoverEvents(true);
     setCursor(Qt::OpenHandCursor);
 
-    setTransform(QTransform()
-                     .translate(CardDimensions::WIDTH_HALF_F, CardDimensions::HEIGHT_HALF_F)
-                     .rotate(90)
-                     .translate(-CardDimensions::WIDTH_HALF_F, -CardDimensions::HEIGHT_HALF_F));
+    if (rotate) {
+        setTransform(QTransform()
+                         .translate(CardDimensions::WIDTH_HALF_F, CardDimensions::HEIGHT_HALF_F)
+                         .rotate(90)
+                         .translate(-CardDimensions::WIDTH_HALF_F, -CardDimensions::HEIGHT_HALF_F));
+    }
 
     connect(&SettingsCache::instance(), &SettingsCache::roundCardCornersChanged, this, [this](bool _roundCardCorners) {
         Q_UNUSED(_roundCardCorners);
@@ -46,14 +50,15 @@ QPainterPath PileZone::shape() const
 
 void PileZone::paint(QPainter *painter, const QStyleOptionGraphicsItem * /*option*/, QWidget * /*widget*/)
 {
+    int angle = rotate ? 90 : 0;
     painter->drawPath(shape());
 
     if (!getLogic()->getCards().isEmpty())
         getLogic()->getCards().at(0)->paintPicture(painter, getLogic()->getCards().at(0)->getTranslatedSize(painter),
-                                                   90);
+                                                   angle);
 
     painter->translate(CardDimensions::WIDTH_HALF_F, CardDimensions::HEIGHT_HALF_F);
-    painter->rotate(-90);
+    painter->rotate(-angle);
     painter->translate(-CardDimensions::WIDTH_HALF_F, -CardDimensions::HEIGHT_HALF_F);
     paintNumberEllipse(getLogic()->getCards().size(), 28, Qt::white, -1, -1, painter);
 }

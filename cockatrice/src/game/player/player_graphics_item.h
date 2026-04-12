@@ -14,7 +14,7 @@
 class HandZone;
 class PileZone;
 class PlayerTarget;
-class StackZone;
+// class StackZone;
 class TableZone;
 class ZoneViewZone;
 
@@ -87,14 +87,18 @@ public:
     {
         return rfgZoneGraphicsItem;
     }
+    [[nodiscard]] PileZone *getCommanderZoneGraphicsItem() const
+    {
+        return commanderZoneGraphicsItem;
+    }
     [[nodiscard]] TableZone *getTableZoneGraphicsItem() const
     {
         return tableZoneGraphicsItem;
     }
-    [[nodiscard]] StackZone *getStackZoneGraphicsItem() const
+    /*[[nodiscard]] StackZone *getStackZoneGraphicsItem() const
     {
         return stackZoneGraphicsItem;
-    }
+    }*/
     [[nodiscard]] HandZone *getHandZoneGraphicsItem() const
     {
         return handZoneGraphicsItem;
@@ -116,8 +120,9 @@ private:
     PileZone *sideboardGraphicsItem;
     PileZone *graveyardZoneGraphicsItem;
     PileZone *rfgZoneGraphicsItem;
+    PileZone *commanderZoneGraphicsItem;
     TableZone *tableZoneGraphicsItem;
-    StackZone *stackZoneGraphicsItem;
+    // StackZone *stackZoneGraphicsItem;
     HandZone *handZoneGraphicsItem;
     QRectF bRect;
     bool mirrored;

@@ -13,6 +13,7 @@ constexpr const char *HAND = "hand";
 constexpr const char *DECK = "deck";
 constexpr const char *SIDEBOARD = "sb";
 constexpr const char *STACK = "stack";
+constexpr const char *COMMANDER = "commander";
 
 } // namespace ZoneNames
 

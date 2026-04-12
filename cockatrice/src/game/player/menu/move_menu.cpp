@@ -19,6 +19,8 @@ MoveMenu::MoveMenu(Player *player) : QMenu(tr("Move to"))
     aMoveToGraveyard->setData(cmMoveToGraveyard);
     aMoveToExile = new QAction(this);
     aMoveToExile->setData(cmMoveToExile);
+    aMoveToCommander = new QAction(this);
+    aMoveToCommander->setData(cmMoveToCommander);
 
     connect(aMoveToTopLibrary, &QAction::triggered, player->getPlayerActions(), &PlayerActions::cardMenuAction);
     connect(aMoveToBottomLibrary, &QAction::triggered, player->getPlayerActions(), &PlayerActions::cardMenuAction);
@@ -28,6 +30,7 @@ MoveMenu::MoveMenu(Player *player) : QMenu(tr("Move to"))
     connect(aMoveToHand, &QAction::triggered, player->getPlayerActions(), &PlayerActions::cardMenuAction);
     connect(aMoveToGraveyard, &QAction::triggered, player->getPlayerActions(), &PlayerActions::cardMenuAction);
     connect(aMoveToExile, &QAction::triggered, player->getPlayerActions(), &PlayerActions::cardMenuAction);
+    connect(aMoveToCommander, &QAction::triggered, player->getPlayerActions(), &PlayerActions::cardMenuAction);
 
     addAction(aMoveToTopLibrary);
     addAction(aMoveToXfromTopOfLibrary);
@@ -40,6 +43,8 @@ MoveMenu::MoveMenu(Player *player) : QMenu(tr("Move to"))
     addAction(aMoveToGraveyard);
     addSeparator();
     addAction(aMoveToExile);
+    addSeparator();
+    addAction(aMoveToCommander);
 
     setShortcutsActive();
 
@@ -56,6 +61,7 @@ void MoveMenu::setShortcutsActive()
     aMoveToHand->setShortcuts(shortcuts.getShortcut("Player/aMoveToHand"));
     aMoveToGraveyard->setShortcuts(shortcuts.getShortcut("Player/aMoveToGraveyard"));
     aMoveToExile->setShortcuts(shortcuts.getShortcut("Player/aMoveToExile"));
+    // TODO: Add shortcut for move to commander
 }
 
 void MoveMenu::retranslateUi()
@@ -67,4 +73,5 @@ void MoveMenu::retranslateUi()
     aMoveToHand->setText(tr("&Hand"));
     aMoveToGraveyard->setText(tr("&Graveyard"));
     aMoveToExile->setText(tr("&Exile"));
+    aMoveToCommander->setText(tr("&Commander"));
 }

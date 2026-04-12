@@ -64,6 +64,7 @@ void Player::initializeZones()
     addZone(new PileZoneLogic(this, ZoneNames::DECK, false, true, false, this));
     addZone(new PileZoneLogic(this, ZoneNames::GRAVE, false, false, true, this));
     addZone(new PileZoneLogic(this, ZoneNames::EXILE, false, false, true, this));
+    addZone(new PileZoneLogic(this, ZoneNames::COMMANDER, false, false, true, this));
     addZone(new PileZoneLogic(this, ZoneNames::SIDEBOARD, false, false, false, this));
     addZone(new TableZoneLogic(this, ZoneNames::TABLE, true, false, true, this));
     addZone(new StackZoneLogic(this, ZoneNames::STACK, true, false, true, this));
@@ -119,7 +120,8 @@ void Player::setZoneId(int _zoneId)
 void Player::processPlayerInfo(const ServerInfo_Player &info)
 {
     static QSet<QString> builtinZones{/* PileZones */
-                                      ZoneNames::DECK, ZoneNames::GRAVE, ZoneNames::EXILE, ZoneNames::SIDEBOARD,
+                                      ZoneNames::DECK, ZoneNames::GRAVE, ZoneNames::EXILE, ZoneNames::COMMANDER,
+                                      ZoneNames::SIDEBOARD,
                                       /* TableZone */
                                       ZoneNames::TABLE,
                                       /* StackZone */

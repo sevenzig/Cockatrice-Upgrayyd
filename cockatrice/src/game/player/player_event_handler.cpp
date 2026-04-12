@@ -223,12 +223,14 @@ void PlayerEventHandler::eventMoveCard(const Event_MoveCard &event, const GameEv
 {
     Player *startPlayer = player->getGame()->getPlayerManager()->getPlayers().value(event.start_player_id());
     if (!startPlayer) {
+        emit logSay(player, QString::fromStdString("return 1: no start player"));
         return;
     }
     QString startZoneString = QString::fromStdString(event.start_zone());
     CardZoneLogic *startZone = startPlayer->getZones().value(startZoneString, 0);
     Player *targetPlayer = player->getGame()->getPlayerManager()->getPlayers().value(event.target_player_id());
     if (!targetPlayer) {
+        emit logSay(player, QString::fromStdString("return 2: no target player"));
         return;
     }
     CardZoneLogic *targetZone;
@@ -238,6 +240,7 @@ void PlayerEventHandler::eventMoveCard(const Event_MoveCard &event, const GameEv
         targetZone = startZone;
     }
     if (!startZone || !targetZone) {
+        emit logSay(player, QString::fromStdString("return 3: no valid zones"));
         return;
     }
 
@@ -252,6 +255,7 @@ void PlayerEventHandler::eventMoveCard(const Event_MoveCard &event, const GameEv
     }
     CardItem *card = startZone->takeCard(position, event.card_id(), startZone != targetZone);
     if (card == nullptr) {
+        emit logSay(player, QString::fromStdString("return 4: no card found"));
         return;
     }
     if (startZone != targetZone) {
@@ -326,6 +330,7 @@ void PlayerEventHandler::eventMoveCard(const Event_MoveCard &event, const GameEv
         targetZone->getName() == ZoneNames::STACK) {
         player->getPlayerActions()->moveOneCardUntil(card);
     }
+    emit logSay(player, QString::fromStdString("return 0: success"));
 }
 
 void PlayerEventHandler::eventFlipCard(const Event_FlipCard &event)

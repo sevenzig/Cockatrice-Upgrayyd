@@ -26,6 +26,7 @@ public:
     QAction *aMoveToTable = nullptr;
     QAction *aMoveToGraveyard = nullptr;
     QAction *aMoveToExile = nullptr;
+    QAction *aMoveToCommander = nullptr;
 };
 
 #endif // COCKATRICE_MOVE_MENU_H
